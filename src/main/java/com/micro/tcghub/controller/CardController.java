@@ -2,13 +2,14 @@ package com.micro.tcghub.controller;
 
 import com.micro.tcghub.model.Card;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.micro.tcghub.service.CardService;
-
-import java.util.List;
 
 @RestController
 public class CardController {
@@ -21,8 +22,9 @@ public class CardController {
     }
 
     @GetMapping(path = "cards")
-    public List<Card> getAllCards(){
-        return cardService.getAllCards();
+    public Page<Card> getAllCards(	@RequestParam(name = "page", required = true) int page, 
+    								@RequestParam(name = "size", required = true) int size){
+        return cardService.getAllCards(PageRequest.of(page, size));
     }
 
     @PostMapping(path = "card")

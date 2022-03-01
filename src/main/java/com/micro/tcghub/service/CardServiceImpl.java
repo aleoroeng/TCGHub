@@ -2,10 +2,10 @@ package com.micro.tcghub.service;
 
 import com.micro.tcghub.model.Card;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.micro.tcghub.repository.CardRepository;
-
-import java.util.List;
 
 @Service
 public class CardServiceImpl implements CardService{
@@ -18,8 +18,8 @@ public class CardServiceImpl implements CardService{
     }
 
     @Override
-    public List<Card> getAllCards() {
-        return cardRepository.findAll();
+    public Page<Card> getAllCards(Pageable pageable) {
+        return cardRepository.findAll(pageable);
     }
 
     @Override

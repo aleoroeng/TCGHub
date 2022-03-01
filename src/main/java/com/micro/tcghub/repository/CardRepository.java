@@ -1,8 +1,15 @@
 package com.micro.tcghub.repository;
+import com.micro.tcghub.enums.Rarity;
 import com.micro.tcghub.model.Card;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Set;
+
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CardRepository extends JpaRepository<Card, Long> {
+public interface CardRepository extends PagingAndSortingRepository<Card, Long> {
+	Set<Card> findBySet(String set);
+	Set<Card> findByCardText(String cardText);
+	Set<Card> findByRarity(Rarity rarity);
 }
